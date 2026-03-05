@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Checkout | Computer Force</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html">
+      <img id="logo" src="logo.svg" alt="Computer Force Logo">
+    </a>
+  </header>
+
+  <!-- NAVIGATION / MENU -->
+  <nav id="nav-menu">
+    <button id="hamburger-btn" class="hamburger-btn" type="button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="search-area">
+      <input type="text" placeholder="Search...">
+      <button type="button">Search</button>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT + ASIDE WRAPPER -->
+  <div class="content-wrapper">
+
+    <!-- MAIN SECTION (80%) -->
+    <main>
+      <h1>Checkout</h1>
+
+      <!-- Confirmation message (hidden until order placed) -->
+      <div id="order-confirmation" class="order-confirmation" style="display:none;">
+        <h2>&#10003; Order Placed Successfully!</h2>
+        <p>Thank you for your order. We will send a confirmation email to you shortly.</p>
+        <a href="products.html" class="btn-continue">Continue Shopping</a>
+      </div>
+
+      <!-- Cart contents -->
+      <div id="checkout-content">
+
+        <!-- Empty cart message -->
+        <div id="empty-cart-msg" style="display:none;">
+          <p class="page-intro">Your cart is empty.</p>
+          <a href="products.html" class="btn-continue">Browse Products</a>
+        </div>
+
+        <!-- Cart table (shown when items exist) -->
+        <div id="cart-table-wrapper">
+          <table class="checkout-table" id="checkout-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Unit Price</th>
+                <th>Qty</th>
+                <th>Subtotal</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
+            <tbody id="checkout-tbody">
+              <!-- filled by JS -->
+            </tbody>
+          </table>
+
+          <!-- Totals section -->
+          <div class="checkout-totals">
+            <table class="totals-table">
+              <tr>
+                <td>Subtotal (ex. GST):</td>
+                <td id="total-ex-gst">$0.00</td>
+              </tr>
+              <tr>
+                <td>GST (10%):</td>
+                <td id="total-gst">$0.00</td>
+              </tr>
+              <tr class="grand-total-row">
+                <td>Grand Total (inc. GST):</td>
+                <td id="total-inc-gst">$0.00</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="checkout-actions">
+            <a href="products.html" class="btn-continue">Continue Shopping</a>
+            <input type="button" class="btn-clear-cart" value="Clear Cart" onclick="clearCartAndUpdate()">
+            <input type="button" class="btn-place-order" value="Place Order" onclick="placeOrder()">
+          </div>
+        </div><!-- #cart-table-wrapper -->
+
+      </div><!-- #checkout-content -->
+    </main>
+
+    <!-- ASIDE SECTION (20%) -->
+    <aside>
+      <h2>Purchases</h2>
+      <div id="cart-items-list"></div>
+      <table class="purchases-table">
+        <tr>
+          <td id="cart-count">0 items</td>
+          <td id="cart-subtotal">$0.00</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="button" class="checkout-btn" value="Go to Checkout" onclick="window.location.href='checkout.html'">
+          </td>
+        </tr>
+      </table>
+    </aside>
+
+  </div><!-- .content-wrapper -->
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Natalia Ambrosio. All rights reserved.</p>
+  </footer>
+
+  <script src="cart.js"></script>
+  <script>
+    // Hamburger menu toggle
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navMenu = document.getElementById('nav-menu');
+    
+    hamburgerBtn.addEventListener('click', function() {
+      navMenu.classList.toggle('active');
+    });
+    
+    // Close menu when a link is clicked
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      renderCheckout();
+    });
+
+    function renderCheckout() {
+      var cart = CF_Cart.get();
+      var tbody = document.getElementById('checkout-tbody');
+      var emptyMsg = document.getElementById('empty-cart-msg');
+      var tableWrapper = document.getElementById('cart-table-wrapper');
+
+      CF_Cart.updateUI();
+
+      if (cart.length === 0) {
+        emptyMsg.style.display = 'block';
+        tableWrapper.style.display = 'none';
+        return;
+      }
+
+      emptyMsg.style.display = 'none';
+      tableWrapper.style.display = 'block';
+
+      /* Build table rows */
+      tbody.innerHTML = '';
+      cart.forEach(function (item) {
+        var row = document.createElement('tr');
+        row.innerHTML =
+          '<td class="checkout-product-cell">' +
+            '<img src="' + item.img + '" alt="' + item.name + '" class="checkout-product-img">' +
+            '<span>' + item.name + '</span>' +
+          '</td>' +
+          '<td>$' + item.price.toFixed(2) + '</td>' +
+          '<td>' +
+            '<input type="number" value="' + item.qty + '" min="1" max="99" class="checkout-qty-input"' +
+            ' onchange="updateQty(\'' + item.id + '\', this.value)">' +
+          '</td>' +
+          '<td>$' + (item.price * item.qty).toFixed(2) + '</td>' +
+          '<td><button class="checkout-remove-btn" onclick="removeItemAndRefresh(\'' + item.id + '\')">&#10005; Remove</button></td>';
+        tbody.appendChild(row);
+      });
+
+      /* Update totals */
+      var subtotal = CF_Cart.total();
+      var gst = subtotal * 0.1;
+      var grand = subtotal + gst;
+      document.getElementById('total-ex-gst').textContent = '$' + subtotal.toFixed(2);
+      document.getElementById('total-gst').textContent = '$' + gst.toFixed(2);
+      document.getElementById('total-inc-gst').textContent = '$' + grand.toFixed(2);
+    }
+
+    function updateQty(productId, newQty) {
+      newQty = parseInt(newQty);
+      if (isNaN(newQty) || newQty < 1) newQty = 1;
+      var cart = CF_Cart.get();
+      var item = cart.find(function (i) { return i.id === productId; });
+      if (item) {
+        item.qty = newQty;
+        CF_Cart.save(cart);
+      }
+      renderCheckout();
+    }
+
+    function removeItemAndRefresh(productId) {
+      CF_Cart.remove(productId);
+      renderCheckout();
+    }
+
+    function clearCartAndUpdate() {
+      if (confirm('Are you sure you want to clear your cart?')) {
+        CF_Cart.clear();
+        renderCheckout();
+      }
+    }
+
+    function placeOrder() {
+      CF_Cart.clear();
+      document.getElementById('checkout-content').style.display = 'none';
+      document.getElementById('order-confirmation').style.display = 'block';
+      CF_Cart.updateUI();
+    }
+  </script>
+
+</body>
+</html>

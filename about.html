@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>About | Computer Force</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html">
+      <img id="logo" src="logo.svg" alt="Computer Force Logo">
+    </a>
+  </header>
+
+  <!-- NAVIGATION / MENU -->
+  <nav id="nav-menu">
+    <button id="hamburger-btn" class="hamburger-btn" type="button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="search-area">
+      <input type="text" placeholder="Search...">
+      <button type="button">Search</button>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT + ASIDE WRAPPER -->
+  <div class="content-wrapper">
+
+    <!-- MAIN SECTION (80%) -->
+    <main>
+      <h1>About Computer Force</h1>
+
+      <div class="about-content">
+        <p>
+          Computer Force is a brand-new start-up company designed to provide first-class service to its customers.
+          Based in Parramatta in Sydney, Computer Force provides top class computing products at bargain prices,
+          for sale throughout Australia.
+        </p>
+
+        <h2>Our Goals</h2>
+        <ul>
+          <li>To become Australia's most well-known and respected hardware and software provider</li>
+          <li>To create a service-based organisation whose goal is to exceed customer's expectations</li>
+          <li>To provide a smooth, efficient, and transparent sales process</li>
+        </ul>
+
+        <h2>Contact Us</h2>
+        <p>You can contact us using the following methods:</p>
+
+        <div class="contact-info">
+          <p><strong>Address:</strong> 100 Main Road, Parramatta, NSW 20150</p>
+          <p><strong>Email:</strong> <a href="mailto:info@computerforce.com.au">info@computerforce.com.au</a></p>
+          <p><strong>Phone:</strong> 02 4444 5555</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- ASIDE SECTION (20%) -->
+    <aside>
+      <h2>Purchases</h2>
+      <div id="cart-items-list"></div>
+      <table class="purchases-table">
+        <tr>
+          <td id="cart-count">0 items</td>
+          <td id="cart-subtotal">$0.00</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="button" class="checkout-btn" value="Go to Checkout" onclick="window.location.href='checkout.html'">
+          </td>
+        </tr>
+      </table>
+    </aside>
+
+  </div><!-- .content-wrapper -->
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Natalia Ambrosio. All rights reserved.</p>
+  </footer>
+
+  <script src="cart.js"></script>
+  <script>
+    // Hamburger menu toggle
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navMenu = document.getElementById('nav-menu');
+    
+    hamburgerBtn.addEventListener('click', function() {
+      navMenu.classList.toggle('active');
+    });
+    
+    // Close menu when a link is clicked
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>

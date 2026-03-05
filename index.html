@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Home | Computer Force</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html">
+      <img id="logo" src="logo.svg" alt="Computer Force Logo">
+    </a>
+  </header>
+
+  <!-- NAVIGATION / MENU -->
+  <nav id="nav-menu">
+    <button id="hamburger-btn" class="hamburger-btn" type="button">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="search-area">
+      <input type="text" placeholder="Search...">
+      <button type="button">Search</button>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT + ASIDE WRAPPER -->
+  <div class="content-wrapper">
+
+    <!-- MAIN SECTION (80%) -->
+    <main>
+      <h1>Welcome to Computer Force</h1>
+      <p class="page-intro">Computer Force is your online expert in all things computing</p>
+
+      <!-- Product Category Cards - each links to the anchor on products.html -->
+      <div class="category-grid">
+
+        <div class="category-card">
+          <a href="products.html#computers">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&q=80" alt="Computers">
+          </a>
+          <h2>Computers</h2>
+        </div>
+
+        <div class="category-card">
+          <a href="products.html#laptops">
+            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&q=80" alt="Laptops">
+          </a>
+          <h2>Laptops</h2>
+        </div>
+
+        <div class="category-card">
+          <a href="products.html#monitors">
+            <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&q=80" alt="Monitors">
+          </a>
+          <h2>Monitors</h2>
+        </div>
+
+        <div class="category-card">
+          <a href="products.html#printing-scanning">
+            <img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=400&q=80" alt="Printing and Scanning">
+          </a>
+          <h2>Printing &amp; Scanning</h2>
+        </div>
+
+        <div class="category-card">
+          <a href="products.html#software">
+            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&q=80" alt="Software">
+          </a>
+          <h2>Software</h2>
+        </div>
+
+        <div class="category-card">
+          <a href="products.html#tablets">
+            <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&q=80" alt="Tablets">
+          </a>
+          <h2>Tablets</h2>
+        </div>
+
+      </div><!-- .category-grid -->
+    </main>
+
+    <!-- ASIDE SECTION (20%) -->
+    <aside>
+      <h2>Purchases</h2>
+      <div id="cart-items-list"></div>
+      <table class="purchases-table">
+        <tr>
+          <td id="cart-count">0 items</td>
+          <td id="cart-subtotal">$0.00</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="button" class="checkout-btn" value="Go to Checkout" onclick="window.location.href='checkout.html'">
+          </td>
+        </tr>
+      </table>
+    </aside>
+
+  </div><!-- .content-wrapper -->
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Natalia Ambrosio. All rights reserved.</p>
+  </footer>
+
+  <script src="cart.js"></script>
+  <script>
+    // Hamburger menu toggle
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navMenu = document.getElementById('nav-menu');
+    
+    hamburgerBtn.addEventListener('click', function() {
+      navMenu.classList.toggle('active');
+    });
+    
+    // Close menu when a link is clicked
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
