@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Natalia Ambrosio | Computer Force</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="logo.png">
+</head>
+<body>
+
+  <!-- ========== DARK OVERLAY ========== -->
+  <div class="panel-overlay" id="panelOverlay"></div>
+
+  <!-- ========== NAV SLIDE PANEL (mobile) ========== -->
+  <div class="mobile-panel nav-panel" id="navPanel">
+    <div class="panel-header">
+      <span>Menu</span>
+      <button class="panel-close-btn" onclick="closeAllPanels()" aria-label="Close menu">&#10005;</button>
+    </div>
+    <ul>
+      <li><a href="index.html" onclick="closeAllPanels()">Home</a></li>
+      <li><a href="products.html" onclick="closeAllPanels()">Products</a></li>
+      <li><a href="register.html" onclick="closeAllPanels()">Register</a></li>
+      <li><a href="about.html" onclick="closeAllPanels()">About</a></li>
+      <li><a href="natalia.html" onclick="closeAllPanels()">Natalia Ambrosio</a></li>
+    </ul>
+    <div class="panel-search">
+      <input type="text" placeholder="Search...">
+      <button type="button">Search</button>
+    </div>
+  </div>
+
+  <!-- ========== CHECKOUT SLIDE PANEL ========== -->
+  <div class="checkout-panel" id="checkoutPanel">
+    <div class="checkout-panel-header">
+      <h2>&#128722; Your Cart</h2>
+      <button class="checkout-panel-close" onclick="closeCheckoutPanel()" aria-label="Close cart">&#10005;</button>
+    </div>
+    <div class="checkout-panel-body" id="checkoutPanelBody">
+      <p class="checkout-panel-empty">Your cart is empty</p>
+    </div>
+    <div class="cp-order-success" id="checkoutPanelSuccess" style="display:none;">
+      <h3>&#10003; Order Placed!</h3>
+      <p>Thank you for your purchase. We will contact you shortly.</p>
+    </div>
+    <div class="checkout-panel-footer">
+      <button class="cp-btn-order" onclick="placeOrder()">Place Order</button>
+      <button class="cp-btn-continue" onclick="closeCheckoutPanel()">Continue Shopping</button>
+    </div>
+  </div>
+
+  <!-- ========== HEADER ========== -->
+  <header>
+    <button class="mobile-hamburger-btn" onclick="openNavPanel()" aria-label="Open menu">
+      <div class="hamburger-icon">
+        <span></span><span></span><span></span>
+      </div>
+    </button>
+    <a href="index.html">
+      <img id="logo" src="logo.png" alt="Computer Force Logo"
+        onerror="this.style.display='none'; document.getElementById('logoText').style.display='inline';">
+      <span id="logoText" class="logo-text" style="display:none;">
+        Computer<span> Force</span>
+      </span>
+    </a>
+    <button class="mobile-bag-btn" onclick="openBagPanel()" aria-label="Open cart">
+      <img src="iconBag.png" alt="Shopping bag">
+      <span class="cart-badge" id="cartBadge"></span>
+    </button>
+  </header>
+
+  <!-- ========== DESKTOP NAV ========== -->
+  <nav>
+    <ul>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="natalia.html" class="active">Natalia Ambrosio</a></li>
+    </ul>
+    <div class="search-area">
+      <input type="text" placeholder="Search...">
+      <button type="button">Search</button>
+    </div>
+  </nav>
+
+  <!-- ========== CONTENT WRAPPER ========== -->
+  <div class="content-wrapper">
+
+    <!-- MAIN SECTION (80%) -->
+    <main>
+      <div class="natalia-page">
+
+        <!-- Hero: photo + name + tagline -->
+        <div class="natalia-hero">
+          <img src="natalia.jpg" alt="Natalia Ambrosio">
+          <div class="natalia-hero-text">
+            <h1>Natalia Ambrosio</h1>
+            <p class="natalia-tagline">IT Student &amp; Front-End Web Developer</p>
+            <p class="natalia-location">&#128205; Sydney, Australia (Manly Beach, Northern Beaches)</p>
+          </div>
+        </div>
+
+        <!-- IT Skills tags -->
+        <div class="natalia-skills">
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+          <span class="skill-tag">Responsive Design</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">Cross-Browser Testing</span>
+          <span class="skill-tag">Web Accessibility (WCAG)</span>
+          <span class="skill-tag">UI/UX Design</span>
+          <span class="skill-tag">Website Development</span>
+          <span class="skill-tag">Data Analysis</span>
+        </div>
+
+        <!-- About -->
+        <div class="natalia-section">
+          <h2>About</h2>
+          <p>
+            I am a journalist with over 16 years of experience in digital marketing and technology, currently completing the
+            <strong>ICT50220 Diploma of Information Technology (Front-End Web Development)</strong> at the
+            Australian College of Business Intelligence (ACBI). My studies are focused on building complex,
+            accessible, and standards-compliant web experiences using HTML5, CSS3, and JavaScript.
+          </p>
+          <p>
+            I combine a strong foundation in technology, data analysis, and creative problem-solving to develop
+            user-centred digital products. I am passionate about bridging the gap between design and development —
+            creating websites that are not just visually engaging, but also performant, accessible, and responsive
+            across all devices.
+          </p>
+        </div>
+
+        <!-- IT Skills -->
+        <div class="natalia-section">
+          <h2>IT Skills &amp; Technical Knowledge</h2>
+          <ul>
+            <li><strong>Front-End Development:</strong> HTML5, CSS3 (external stylesheets, CSS variables, Flexbox, Grid), JavaScript (DOM manipulation, sessionStorage)</li>
+            <li><strong>Responsive Web Design:</strong> Mobile-first layouts, media queries, cross-device testing</li>
+            <li><strong>Web Standards &amp; Accessibility:</strong> W3C compliance, WCAG 2.1, WAVE accessibility validation</li>
+            <li><strong>CSS Validation:</strong> W3C CSS Validator, debugging and resolving stylesheet errors</li>
+            <li><strong>Cross-Browser Testing:</strong> BrowserStack (Chrome, Firefox, Edge, Safari), device simulation</li>
+            <li><strong>Version Control &amp; Hosting:</strong> GitHub, GitHub Pages deployment</li>
+            <li><strong>Web Security:</strong> Cyber security best practices applicable to web development</li>
+            <li><strong>Website Development:</strong> Full website builds including e-commerce layouts, registration forms, and interactive features</li>
+            <li><strong>Data Analysis &amp; Technology:</strong> Integrating data and analytics tools into digital marketing and business strategies</li>
+          </ul>
+        </div>
+
+        <!-- Current Project -->
+        <div class="natalia-section">
+          <h2>Current Project</h2>
+          <p>
+            As part of my diploma assessment (ICTWEB519 &amp; ICTWEB520), I developed the
+            <strong>Computer Force</strong> website — a multi-page e-commerce platform for an online electronics
+            retailer based in Parramatta, Sydney. The project demonstrates skills in complex page layouts,
+            responsive design, external CSS architecture, interactive shopping cart functionality, and full
+            cross-browser and accessibility validation.
+          </p>
+        </div>
+
+        <!-- Background -->
+        <div class="natalia-section">
+          <h2>Professional Background</h2>
+          <p>
+            Beyond IT, I bring extensive experience in digital marketing, social media strategy, content creation,
+            copywriting, and business consulting. I have worked with startups and established companies across
+            Brazil and Australia, including mentoring businesses in acceleration programs and developing
+            storytelling-driven marketing strategies. This cross-disciplinary background gives me a unique
+            perspective when building digital solutions that must connect with real users.
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div class="natalia-section natalia-links">
+          <h2>Links</h2>
+          <a href="https://www.linkedin.com/in/natalia-ambrosio/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://slowliving.au/nataliaambrosio" target="_blank" rel="noopener">Website</a>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- ASIDE SECTION (desktop) -->
+    <aside>
+      <h2>Purchases</h2>
+      <table class="purchases-table">
+        <tbody id="asideCartBody">
+          <tr><td colspan="2" class="cart-empty-msg">Your cart is empty</td></tr>
+        </tbody>
+      </table>
+      <input type="button" class="checkout-btn" value="Go to Checkout" onclick="openCheckoutPanel()">
+    </aside>
+
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <p>&copy; 2026 Natalia Ambrosio. All rights reserved.</p>
+  </footer>
+
+  <script src="cart.js"></script>
+
+</body>
+</html>

@@ -6,28 +6,88 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Products | Computer Force</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="icon" href="logo.png">
 </head>
 <body>
 
+  <div class="panel-overlay" id="panelOverlay"></div>
+
+  <!-- NAV SLIDE PANEL -->
+  <div class="mobile-panel nav-panel" id="navPanel">
+    <div class="panel-header">
+      <span>Menu</span>
+      <button class="panel-close-btn" onclick="closeAllPanels()" aria-label="Close menu">&#10005;</button>
+    </div>
+    <ul>
+      <li><a href="index.html" onclick="closeAllPanels()">Home</a></li>
+      <li><a href="products.html" onclick="closeAllPanels()">Products</a></li>
+      <li><a href="register.html" onclick="closeAllPanels()">Register</a></li>
+      <li><a href="about.html" onclick="closeAllPanels()">About</a></li>
+      <li><a href="natalia.html" onclick="closeAllPanels()">Natalia Ambrosio</a></li>
+    </ul>
+    <div class="panel-search">
+      <input type="text" placeholder="Search...">
+      <button type="button">Search</button>
+    </div>
+  </div>
+
+  <!-- BAG SLIDE PANEL -->
+  <div class="mobile-panel bag-panel" id="bagPanel">
+    <div class="panel-header">
+      <span>Purchases</span>
+      <button class="panel-close-btn" onclick="closeAllPanels()" aria-label="Close cart">&#10005;</button>
+    </div>
+    <div class="bag-panel-content">
+      <h2>Purchases</h2>
+      <table class="purchases-table">
+        <tbody id="mobilePanelCartBody">
+          <tr><td colspan="2" class="cart-empty-msg">Your cart is empty</td></tr>
+        </tbody>
+      </table>
+      <input type="button" class="checkout-btn" value="Go to Checkout" onclick="openCheckoutPanel()">
+    </div>
+  </div>
+
+  <!-- CHECKOUT SLIDE PANEL -->
+  <div class="checkout-panel" id="checkoutPanel">
+    <div class="checkout-panel-header">
+      <h2>&#128722; Your Cart</h2>
+      <button class="checkout-panel-close" onclick="closeCheckoutPanel()" aria-label="Close cart">&#10005;</button>
+    </div>
+    <div class="checkout-panel-body" id="checkoutPanelBody">
+      <p class="checkout-panel-empty">Your cart is empty</p>
+    </div>
+    <div class="checkout-panel-success cp-order-success" id="checkoutPanelSuccess" style="display:none;">
+      <h3>&#10003; Order Placed!</h3>
+      <p>Thank you for your purchase. We will contact you shortly.</p>
+    </div>
+    <div class="checkout-panel-footer">
+      <button class="cp-btn-order" onclick="placeOrder()">Place Order</button>
+      <button class="cp-btn-continue" onclick="closeCheckoutPanel()">Continue Shopping</button>
+    </div>
+  </div>
+
   <!-- HEADER -->
   <header>
-    <a href="index.html">
-      <img id="logo" src="logo.svg" alt="Computer Force Logo">
-    </a>
+    <button class="mobile-hamburger-btn" onclick="openNavPanel()" aria-label="Open menu">
+      <div class="hamburger-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <a href="index.html" class="logo-text">Computer <span>Force</span></a>
+
+    <button class="mobile-bag-btn" onclick="openBagPanel()" aria-label="Open cart">
+      &#128717;
+      <span class="cart-badge" id="cartBadge"></span>
+    </button>
   </header>
 
-  <!-- NAVIGATION / MENU -->
-  <nav id="nav-menu">
-    <button id="hamburger-btn" class="hamburger-btn" type="button">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+  <!-- NAV (desktop) -->
+  <nav>
     <ul>
       <li><a href="products.html">Products</a></li>
       <li><a href="register.html">Register</a></li>
       <li><a href="about.html">About</a></li>
+      <li><a href="natalia.html">Natalia Ambrosio</a></li>
     </ul>
     <div class="search-area">
       <input type="text" placeholder="Search...">
@@ -35,144 +95,742 @@
     </div>
   </nav>
 
-  <!-- MAIN CONTENT + ASIDE WRAPPER -->
+  <!-- CONTENT WRAPPER -->
   <div class="content-wrapper">
 
-    <!-- MAIN SECTION (80%) -->
+    <!-- MAIN (80%) -->
     <main>
-      <h1>Products we sell</h1>
-      <p class="page-intro">Computer Force sells products in the following categories:</p>
+      <h1>Products</h1>
+      <p class="page-intro">Everything you need for your digital life — all in one place. From powerful desktops and laptops to the latest peripherals, software, and accessories, Computer Force has you covered. Browse our full range below and find the perfect tech at the best prices.</p>
 
-      <div class="products-grid">
-
-        <a href="product.html?category=audio" class="product-category-link" id="audio">
-          <div class="product-category">
-            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80" alt="Audio">
-            <h2>Audio</h2>
+      <!-- ── AUDIO ── -->
+      <div class="category-section" id="audio">
+        <div class="category-section-header">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100&q=80" alt="Audio">
+          <h2>Audio</h2>
+        </div>
+        <div class="product-list">
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80" alt="Sony WH-1000XM5">
+            <div class="product-item-info">
+              <div class="product-item-name">Sony WH-1000XM5 Headphones</div>
+              <div class="product-item-price">$449.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'audio-1','Sony WH-1000XM5',449)">Add to Cart</button>
+            </div>
           </div>
-        </a>
-
-        <a href="product.html?category=computers" class="product-category-link" id="computers">
-          <div class="product-category">
-            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&q=80" alt="Computers">
-            <h2>Computers</h2>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&q=80" alt="Bose QuietComfort">
+            <div class="product-item-info">
+              <div class="product-item-name">Bose QuietComfort 45</div>
+              <div class="product-item-price">$379.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'audio-2','Bose QuietComfort 45',379)">Add to Cart</button>
+            </div>
           </div>
-        </a>
-
-        <a href="product.html?category=graphics-cards" class="product-category-link" id="graphics-cards">
-          <div class="product-category">
-            <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80" alt="Graphics Cards">
-            <h2>Graphics Cards</h2>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&q=80" alt="JBL Earbuds">
+            <div class="product-item-info">
+              <div class="product-item-name">JBL Tune 230NC Earbuds</div>
+              <div class="product-item-price">$129.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'audio-3','JBL Tune 230NC',129)">Add to Cart</button>
+            </div>
           </div>
-        </a>
-
-        <a href="product.html?category=keyboard-mice" class="product-category-link" id="keyboard-mice">
-          <div class="product-category">
-            <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&q=80" alt="Keyboards and Mice">
-            <h2>Keyboard &amp; Mice</h2>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&q=80" alt="Sennheiser Headphones">
+            <div class="product-item-info">
+              <div class="product-item-name">Sennheiser HD 450BT Headphones</div>
+              <div class="product-item-price">$229.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'audio-4','Sennheiser HD 450BT',229)">Add to Cart</button>
+            </div>
           </div>
-        </a>
-
-        <a href="product.html?category=laptops" class="product-category-link" id="laptops">
-          <div class="product-category">
-            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&q=80" alt="Laptops">
-            <h2>Laptops</h2>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=400&q=80" alt="Apple AirPods Pro">
+            <div class="product-item-info">
+              <div class="product-item-name">Apple AirPods Pro 2nd Gen</div>
+              <div class="product-item-price">$399.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'audio-5','Apple AirPods Pro 2',399)">Add to Cart</button>
+            </div>
           </div>
-        </a>
-
-        <a href="product.html?category=monitors" class="product-category-link" id="monitors">
-          <div class="product-category">
-            <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&q=80" alt="Monitors">
-            <h2>Monitors</h2>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&q=80" alt="Bluetooth Speaker">
+            <div class="product-item-info">
+              <div class="product-item-name">Sony SRS-XB33 Bluetooth Speaker</div>
+              <div class="product-item-price">$179.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'audio-6','Sony SRS-XB33',179)">Add to Cart</button>
+            </div>
           </div>
-        </a>
+        </div>
+      </div>
 
-        <a href="product.html?category=networking" class="product-category-link" id="networking">
-          <div class="product-category">
-            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80" alt="Networking">
-            <h2>Networking</h2>
+      <!-- ── COMPUTERS ── -->
+      <div class="category-section" id="computers">
+        <div class="category-section-header">
+          <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=100&q=80" alt="Computers">
+          <h2>Computers</h2>
+        </div>
+        <div class="product-list">
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1593640408182-31c228f64c32?w=400&q=80" alt="Desktop PC">
+            <div class="product-item-info">
+              <div class="product-item-name">HP Envy Desktop i7 32GB</div>
+              <div class="product-item-price">$1,499.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'comp-1','HP Envy Desktop',1499)">Add to Cart</button>
+            </div>
           </div>
-        </a>
-
-        <a href="product.html?category=peripherals" class="product-category-link" id="peripherals">
-          <div class="product-category">
-            <img src="https://images.unsplash.com/photo-1610465299993-e6675c9f9efa?w=400&q=80" alt="Peripherals">
-            <h2>Peripherals</h2>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=400&q=80" alt="Gaming PC">
+            <div class="product-item-info">
+              <div class="product-item-name">Lenovo Legion Tower i9 RTX</div>
+              <div class="product-item-price">$2,299.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'comp-2','Lenovo Legion Tower',2299)">Add to Cart</button>
+            </div>
           </div>
-        </a>
-
-        <a href="product.html?category=printing-scanning" class="product-category-link" id="printing-scanning">
-          <div class="product-category">
-            <img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=400&q=80" alt="Printing and Scanning">
-            <h2>Printing &amp; Scanning</h2>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1616763355548-1b606f439f86?w=400&q=80" alt="Mini PC">
+            <div class="product-item-info">
+              <div class="product-item-name">Intel NUC Mini PC i5</div>
+              <div class="product-item-price">$749.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'comp-3','Intel NUC Mini PC',749)">Add to Cart</button>
+            </div>
           </div>
-        </a>
-
-        <a href="product.html?category=software" class="product-category-link" id="software">
-          <div class="product-category">
-            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&q=80" alt="Software">
-            <h2>Software</h2>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&q=80" alt="Mac Mini">
+            <div class="product-item-info">
+              <div class="product-item-name">Apple Mac Mini M2 8GB</div>
+              <div class="product-item-price">$1,099.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'comp-4','Apple Mac Mini M2',1099)">Add to Cart</button>
+            </div>
           </div>
-        </a>
-
-        <a href="product.html?category=storage" class="product-category-link" id="storage">
-          <div class="product-category">
-            <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?w=400&q=80" alt="Storage">
-            <h2>Storage</h2>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1547082299-de196ea013d6?w=400&q=80" alt="Gaming Desktop">
+            <div class="product-item-info">
+              <div class="product-item-name">ASUS ROG Strix G15 Desktop i9</div>
+              <div class="product-item-price">$2,799.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'comp-5','ASUS ROG Strix Desktop',2799)">Add to Cart</button>
+            </div>
           </div>
-        </a>
-
-        <a href="product.html?category=tablets" class="product-category-link" id="tablets">
-          <div class="product-category">
-            <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&q=80" alt="Tablets">
-            <h2>Tablets</h2>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=400&q=80" alt="Acer Desktop">
+            <div class="product-item-info">
+              <div class="product-item-name">Acer Aspire TC i5 16GB</div>
+              <div class="product-item-price">$699.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'comp-6','Acer Aspire TC i5',699)">Add to Cart</button>
+            </div>
           </div>
-        </a>
+        </div>
+      </div>
 
-      </div><!-- .products-grid -->
+      <!-- ── GRAPHICS CARDS ── -->
+      <div class="category-section" id="graphics-cards">
+        <div class="category-section-header">
+          <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=100&q=80" alt="Graphics Cards">
+          <h2>Graphics Cards</h2>
+        </div>
+        <div class="product-list">
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80" alt="RTX 4070">
+            <div class="product-item-info">
+              <div class="product-item-name">NVIDIA GeForce RTX 4070</div>
+              <div class="product-item-price">$899.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'gpu-1','NVIDIA RTX 4070',899)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=400&q=80" alt="RX 7800 XT">
+            <div class="product-item-info">
+              <div class="product-item-name">AMD Radeon RX 7800 XT</div>
+              <div class="product-item-price">$699.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'gpu-2','AMD RX 7800 XT',699)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&q=80" alt="RTX 4090">
+            <div class="product-item-info">
+              <div class="product-item-name">NVIDIA GeForce RTX 4090</div>
+              <div class="product-item-price">$1,999.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'gpu-3','NVIDIA RTX 4090',1999)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=400&q=80" alt="RTX 4060">
+            <div class="product-item-info">
+              <div class="product-item-name">NVIDIA GeForce RTX 4060</div>
+              <div class="product-item-price">$399.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'gpu-4','NVIDIA RTX 4060',399)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=400&q=80" alt="RX 7600">
+            <div class="product-item-info">
+              <div class="product-item-name">AMD Radeon RX 7600</div>
+              <div class="product-item-price">$299.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'gpu-5','AMD RX 7600',299)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1616763355548-1b606f439f86?w=400&q=80" alt="Intel Arc">
+            <div class="product-item-info">
+              <div class="product-item-name">Intel Arc A770 16GB</div>
+              <div class="product-item-price">$349.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'gpu-6','Intel Arc A770',349)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── KEYBOARDS & MICE ── -->
+      <div class="category-section" id="keyboard-mice">
+        <div class="category-section-header">
+          <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=100&q=80" alt="Keyboards and Mice">
+          <h2>Keyboard &amp; Mice</h2>
+        </div>
+        <div class="product-list">
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&q=80" alt="Mechanical Keyboard">
+            <div class="product-item-info">
+              <div class="product-item-name">Logitech MX Keys Keyboard</div>
+              <div class="product-item-price">$189.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'kb-1','Logitech MX Keys',189)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=400&q=80" alt="Gaming Mouse">
+            <div class="product-item-info">
+              <div class="product-item-name">Razer DeathAdder V3 Mouse</div>
+              <div class="product-item-price">$99.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'kb-2','Razer DeathAdder V3',99)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=400&q=80" alt="Keyboard Mouse Combo">
+            <div class="product-item-info">
+              <div class="product-item-name">Microsoft Wireless Combo</div>
+              <div class="product-item-price">$79.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'kb-3','Microsoft Wireless Combo',79)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1595044426077-d36d9236d54a?w=400&q=80" alt="Corsair Keyboard">
+            <div class="product-item-info">
+              <div class="product-item-name">Corsair K95 RGB Mechanical</div>
+              <div class="product-item-price">$229.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'kb-4','Corsair K95 RGB',229)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&q=80" alt="Apple Magic Keyboard">
+            <div class="product-item-info">
+              <div class="product-item-name">Apple Magic Keyboard</div>
+              <div class="product-item-price">$149.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'kb-5','Apple Magic Keyboard',149)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=400&q=80" alt="Logitech G502 Mouse">
+            <div class="product-item-info">
+              <div class="product-item-name">Logitech G502 X HERO Mouse</div>
+              <div class="product-item-price">$129.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'kb-6','Logitech G502 X',129)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── LAPTOPS ── -->
+      <div class="category-section" id="laptops">
+        <div class="category-section-header">
+          <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=100&q=80" alt="Laptops">
+          <h2>Laptops</h2>
+        </div>
+        <div class="product-list">
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&q=80" alt="MacBook">
+            <div class="product-item-info">
+              <div class="product-item-name">Apple MacBook Air M2 13"</div>
+              <div class="product-item-price">$1,799.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'lap-1','MacBook Air M2',1799)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=400&q=80" alt="Dell XPS">
+            <div class="product-item-info">
+              <div class="product-item-name">Dell XPS 15 i7 16GB</div>
+              <div class="product-item-price">$2,099.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'lap-2','Dell XPS 15',2099)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1588872657578-7efd81ec7d19?w=400&q=80" alt="HP Pavilion">
+            <div class="product-item-info">
+              <div class="product-item-name">HP Pavilion 15 Ryzen 5</div>
+              <div class="product-item-price">$899.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'lap-3','HP Pavilion 15',899)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=400&q=80" alt="ASUS ZenBook">
+            <div class="product-item-info">
+              <div class="product-item-name">ASUS ZenBook 14 OLED i5</div>
+              <div class="product-item-price">$1,299.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'lap-4','ASUS ZenBook 14',1299)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&q=80" alt="Lenovo ThinkPad">
+            <div class="product-item-info">
+              <div class="product-item-name">Lenovo ThinkPad E15 Ryzen 7</div>
+              <div class="product-item-price">$999.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'lap-5','Lenovo ThinkPad E15',999)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=400&q=80" alt="Acer Nitro Gaming Laptop">
+            <div class="product-item-info">
+              <div class="product-item-name">Acer Nitro 5 Gaming i7 RTX</div>
+              <div class="product-item-price">$1,199.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'lap-6','Acer Nitro 5',1199)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MONITORS ── -->
+      <div class="category-section" id="monitors">
+        <div class="category-section-header">
+          <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=100&q=80" alt="Monitors">
+          <h2>Monitors</h2>
+        </div>
+        <div class="product-list">
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&q=80" alt="4K Monitor">
+            <div class="product-item-info">
+              <div class="product-item-name">LG 27" 4K UHD Monitor</div>
+              <div class="product-item-price">$649.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'mon-1','LG 27 4K Monitor',649)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1586210579191-33b45e38fa2c?w=400&q=80" alt="Curved Monitor">
+            <div class="product-item-info">
+              <div class="product-item-name">Samsung 32" Curved 165Hz</div>
+              <div class="product-item-price">$549.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'mon-2','Samsung 32 Curved',549)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1547082299-de196ea013d6?w=400&q=80" alt="Dell UltraSharp Monitor">
+            <div class="product-item-info">
+              <div class="product-item-name">Dell UltraSharp 27" 4K USB-C</div>
+              <div class="product-item-price">$799.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'mon-3','Dell UltraSharp 27',799)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1593640408182-31c228f64c32?w=400&q=80" alt="BenQ Monitor">
+            <div class="product-item-info">
+              <div class="product-item-name">BenQ GW2780 27" 144Hz</div>
+              <div class="product-item-price">$449.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'mon-4','BenQ GW2780 27',449)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1586210579191-33b45e38fa2c?w=400&q=80" alt="LG UltraWide Monitor">
+            <div class="product-item-info">
+              <div class="product-item-name">LG 34" UltraWide 100Hz</div>
+              <div class="product-item-price">$699.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'mon-5','LG 34 UltraWide',699)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&q=80" alt="ASUS ProArt Monitor">
+            <div class="product-item-info">
+              <div class="product-item-name">ASUS ProArt 32" 4K Display</div>
+              <div class="product-item-price">$899.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'mon-6','ASUS ProArt 32',899)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── NETWORKING ── -->
+      <div class="category-section" id="networking">
+        <div class="category-section-header">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=100&q=80" alt="Networking">
+          <h2>Networking</h2>
+        </div>
+        <div class="product-list">
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80" alt="WiFi Router">
+            <div class="product-item-info">
+              <div class="product-item-name">ASUS ROG Rapture WiFi 6 Router</div>
+              <div class="product-item-price">$349.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'net-1','ASUS ROG Router',349)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&q=80" alt="Network Switch">
+            <div class="product-item-info">
+              <div class="product-item-name">TP-Link 8-Port Gigabit Switch</div>
+              <div class="product-item-price">$59.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'net-2','TP-Link Switch',59)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80" alt="Netgear Router">
+            <div class="product-item-info">
+              <div class="product-item-name">Netgear Nighthawk AX6 WiFi 6</div>
+              <div class="product-item-price">$299.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'net-3','Netgear Nighthawk AX6',299)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&q=80" alt="Mesh WiFi System">
+            <div class="product-item-info">
+              <div class="product-item-name">TP-Link Deco XE75 Mesh WiFi</div>
+              <div class="product-item-price">$249.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'net-4','TP-Link Deco XE75',249)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80" alt="Ubiquiti Switch">
+            <div class="product-item-info">
+              <div class="product-item-name">Ubiquiti UniFi 24-Port Switch</div>
+              <div class="product-item-price">$399.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'net-5','Ubiquiti UniFi Switch',399)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&q=80" alt="Cisco Switch">
+            <div class="product-item-info">
+              <div class="product-item-name">Cisco SG110 16-Port Switch</div>
+              <div class="product-item-price">$129.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'net-6','Cisco SG110 Switch',129)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PERIPHERALS ── -->
+      <div class="category-section" id="peripherals">
+        <div class="category-section-header">
+          <img src="https://images.unsplash.com/photo-1610465299993-e6675c9f9efa?w=100&q=80" alt="Peripherals">
+          <h2>Peripherals</h2>
+        </div>
+        <div class="product-list">
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1610465299993-e6675c9f9efa?w=400&q=80" alt="Webcam">
+            <div class="product-item-info">
+              <div class="product-item-name">Logitech C920 HD Webcam</div>
+              <div class="product-item-price">$149.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'per-1','Logitech C920 Webcam',149)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=400&q=80" alt="USB Hub">
+            <div class="product-item-info">
+              <div class="product-item-name">Anker 10-Port USB Hub</div>
+              <div class="product-item-price">$69.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'per-2','Anker USB Hub',69)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=400&q=80" alt="USB Microphone">
+            <div class="product-item-info">
+              <div class="product-item-name">Blue Yeti USB Microphone</div>
+              <div class="product-item-price">$189.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'per-3','Blue Yeti Microphone',189)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=400&q=80" alt="Stream Deck">
+            <div class="product-item-info">
+              <div class="product-item-name">Elgato Stream Deck MK.2</div>
+              <div class="product-item-price">$249.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'per-4','Elgato Stream Deck',249)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=400&q=80" alt="Docking Station">
+            <div class="product-item-info">
+              <div class="product-item-name">Dell USB-C Docking Station</div>
+              <div class="product-item-price">$299.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'per-5','Dell USB-C Dock',299)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1610465299993-e6675c9f9efa?w=400&q=80" alt="Headset">
+            <div class="product-item-info">
+              <div class="product-item-name">Jabra Evolve2 75 Headset</div>
+              <div class="product-item-price">$449.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'per-6','Jabra Evolve2 75',449)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PRINTING & SCANNING ── -->
+      <div class="category-section" id="printing-scanning">
+        <div class="category-section-header">
+          <img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=100&q=80" alt="Printing">
+          <h2>Printing &amp; Scanning</h2>
+        </div>
+        <div class="product-list">
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=400&q=80" alt="Printer">
+            <div class="product-item-info">
+              <div class="product-item-name">HP OfficeJet Pro 9015e</div>
+              <div class="product-item-price">$299.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'pri-1','HP OfficeJet Pro 9015e',299)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1563770660941-20978e870e26?w=400&q=80" alt="Scanner">
+            <div class="product-item-info">
+              <div class="product-item-name">Epson Perfection V39 Scanner</div>
+              <div class="product-item-price">$149.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'pri-2','Epson V39 Scanner',149)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=400&q=80" alt="Canon Printer">
+            <div class="product-item-info">
+              <div class="product-item-name">Canon PIXMA TR4620 All-in-One</div>
+              <div class="product-item-price">$129.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'pri-3','Canon PIXMA TR4620',129)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1563770660941-20978e870e26?w=400&q=80" alt="Brother MFC Printer">
+            <div class="product-item-info">
+              <div class="product-item-name">Brother MFC-J4335DW Inkjet</div>
+              <div class="product-item-price">$199.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'pri-4','Brother MFC-J4335DW',199)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=400&q=80" alt="Epson EcoTank Printer">
+            <div class="product-item-info">
+              <div class="product-item-name">Epson EcoTank ET-2760</div>
+              <div class="product-item-price">$349.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'pri-5','Epson EcoTank ET-2760',349)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1563770660941-20978e870e26?w=400&q=80" alt="Canon Scanner">
+            <div class="product-item-info">
+              <div class="product-item-name">Canon CanoScan LiDE 400</div>
+              <div class="product-item-price">$119.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'pri-6','Canon CanoScan LiDE 400',119)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SOFTWARE ── -->
+      <div class="category-section" id="software">
+        <div class="category-section-header">
+          <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=100&q=80" alt="Software">
+          <h2>Software</h2>
+        </div>
+        <div class="product-list">
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&q=80" alt="Windows 11">
+            <div class="product-item-info">
+              <div class="product-item-name">Microsoft Windows 11 Home</div>
+              <div class="product-item-price">$199.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'sof-1','Windows 11 Home',199)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1633419461186-7d40a38105ec?w=400&q=80" alt="Office 365">
+            <div class="product-item-info">
+              <div class="product-item-name">Microsoft 365 Personal 1yr</div>
+              <div class="product-item-price">$109.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'sof-2','Microsoft 365',109)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1614036417651-efe5912149d8?w=400&q=80" alt="Antivirus">
+            <div class="product-item-info">
+              <div class="product-item-name">Norton 360 Antivirus 1yr</div>
+              <div class="product-item-price">$79.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'sof-3','Norton 360',79)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&q=80" alt="Adobe Creative Cloud">
+            <div class="product-item-info">
+              <div class="product-item-name">Adobe Creative Cloud 1yr</div>
+              <div class="product-item-price">$599.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'sof-4','Adobe Creative Cloud',599)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1633419461186-7d40a38105ec?w=400&q=80" alt="Autodesk AutoCAD">
+            <div class="product-item-info">
+              <div class="product-item-name">Autodesk AutoCAD LT 2024</div>
+              <div class="product-item-price">$219.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'sof-5','Autodesk AutoCAD LT',219)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1614036417651-efe5912149d8?w=400&q=80" alt="Kaspersky Antivirus">
+            <div class="product-item-info">
+              <div class="product-item-name">Kaspersky Total Security 1yr</div>
+              <div class="product-item-price">$59.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'sof-6','Kaspersky Total Security',59)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STORAGE ── -->
+      <div class="category-section" id="storage">
+        <div class="category-section-header">
+          <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?w=100&q=80" alt="Storage">
+          <h2>Storage</h2>
+        </div>
+        <div class="product-list">
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?w=400&q=80" alt="SSD">
+            <div class="product-item-info">
+              <div class="product-item-name">Samsung 970 EVO 1TB SSD</div>
+              <div class="product-item-price">$179.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'sto-1','Samsung 970 EVO 1TB',179)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1531492746076-161ca9bcad58?w=400&q=80" alt="External HDD">
+            <div class="product-item-info">
+              <div class="product-item-name">Seagate Expansion 2TB HDD</div>
+              <div class="product-item-price">$99.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'sto-2','Seagate 2TB HDD',99)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?w=400&q=80" alt="WD Blue HDD">
+            <div class="product-item-info">
+              <div class="product-item-name">WD Blue 2TB Internal HDD</div>
+              <div class="product-item-price">$79.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'sto-3','WD Blue 2TB HDD',79)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1531492746076-161ca9bcad58?w=400&q=80" alt="Samsung T7 Portable SSD">
+            <div class="product-item-info">
+              <div class="product-item-name">Samsung T7 Portable SSD 1TB</div>
+              <div class="product-item-price">$129.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'sto-4','Samsung T7 SSD 1TB',129)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?w=400&q=80" alt="SanDisk USB Flash Drive">
+            <div class="product-item-info">
+              <div class="product-item-name">SanDisk Ultra 256GB USB 3.0</div>
+              <div class="product-item-price">$39.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'sto-5','SanDisk Ultra 256GB',39)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1531492746076-161ca9bcad58?w=400&q=80" alt="LaCie Rugged HDD">
+            <div class="product-item-info">
+              <div class="product-item-name">LaCie Rugged 4TB External HDD</div>
+              <div class="product-item-price">$199.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'sto-6','LaCie Rugged 4TB',199)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TABLETS ── -->
+      <div class="category-section" id="tablets">
+        <div class="category-section-header">
+          <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=100&q=80" alt="Tablets">
+          <h2>Tablets</h2>
+        </div>
+        <div class="product-list">
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&q=80" alt="iPad">
+            <div class="product-item-info">
+              <div class="product-item-name">Apple iPad 10th Gen 64GB</div>
+              <div class="product-item-price">$749.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'tab-1','Apple iPad 10th Gen',749)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1561154464-82e9adf32764?w=400&q=80" alt="Samsung Tab">
+            <div class="product-item-info">
+              <div class="product-item-name">Samsung Galaxy Tab S9 256GB</div>
+              <div class="product-item-price">$1,099.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'tab-2','Samsung Galaxy Tab S9',1099)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1589739900266-43b2843f4c12?w=400&q=80" alt="Lenovo Tab">
+            <div class="product-item-info">
+              <div class="product-item-name">Lenovo Tab P12 Pro 256GB</div>
+              <div class="product-item-price">$849.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'tab-3','Lenovo Tab P12',849)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?w=400&q=80" alt="Microsoft Surface Pro">
+            <div class="product-item-info">
+              <div class="product-item-name">Microsoft Surface Pro 9 i5</div>
+              <div class="product-item-price">$1,399.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'tab-4','Microsoft Surface Pro 9',1399)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1589739900266-43b2843f4c12?w=400&q=80" alt="Amazon Fire HD 10">
+            <div class="product-item-info">
+              <div class="product-item-name">Amazon Fire HD 10 64GB</div>
+              <div class="product-item-price">$229.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'tab-5','Amazon Fire HD 10',229)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-item">
+            <img src="https://images.unsplash.com/photo-1561154464-82e9adf32764?w=400&q=80" alt="Google Pixel Tablet">
+            <div class="product-item-info">
+              <div class="product-item-name">Google Pixel Tablet 128GB</div>
+              <div class="product-item-price">$699.00</div>
+              <button class="add-to-cart-btn" onclick="addItem(this,'tab-6','Google Pixel Tablet',699)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </main>
 
-    <!-- ASIDE SECTION (20%) -->
+    <!-- ASIDE (20% — desktop) -->
     <aside>
       <h2>Purchases</h2>
-      <div id="cart-items-list"></div>
       <table class="purchases-table">
-        <tr>
-          <td id="cart-count">0 items</td>
-          <td id="cart-subtotal">$0.00</td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input type="button" class="checkout-btn" value="Go to Checkout" onclick="window.location.href='checkout.html'">
-          </td>
-        </tr>
+        <tbody id="asideCartBody">
+          <tr><td colspan="2" class="cart-empty-msg">Your cart is empty</td></tr>
+        </tbody>
       </table>
+      <input type="button" class="checkout-btn" value="Go to Checkout" onclick="openCheckoutPanel()">
     </aside>
 
   </div><!-- .content-wrapper -->
 
-  <!-- FOOTER -->
   <footer>
     <p>&copy; 2026 Natalia Ambrosio. All rights reserved.</p>
   </footer>
 
   <script src="cart.js"></script>
   <script>
-    // Hamburger menu toggle
-    const hamburgerBtn = document.getElementById('hamburger-btn');
-    const navMenu = document.getElementById('nav-menu');
-    
-    hamburgerBtn.addEventListener('click', function() {
-      navMenu.classList.toggle('active');
-    });
-    
-    // Close menu when a link is clicked
-    const navLinks = navMenu.querySelectorAll('a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        navMenu.classList.remove('active');
-      });
-    });
+    function addItem(btn, id, name, price) {
+      var img = btn.closest('.product-item').querySelector('img').src;
+      addToCart(id, name, price, img);
+      btn.textContent = '✓ Added';
+      btn.classList.add('added');
+      setTimeout(function() {
+        btn.textContent = 'Add to Cart';
+        btn.classList.remove('added');
+      }, 1500);
+    }
   </script>
+
 </body>
 </html>

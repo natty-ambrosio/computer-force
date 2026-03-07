@@ -6,28 +6,97 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Home | Computer Force</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="icon" href="logo.png">
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- ========== DARK OVERLAY (behind slide panels) ========== -->
+  <div class="panel-overlay" id="panelOverlay"></div>
+
+  <!-- ========== NAV SLIDE PANEL (hamburger → left) ========== -->
+  <div class="mobile-panel nav-panel" id="navPanel">
+    <div class="panel-header">
+      <span>Menu</span>
+      <button class="panel-close-btn" onclick="closeAllPanels()" aria-label="Close menu">&#10005;</button>
+    </div>
+    <ul>
+      <li><a href="index.html" onclick="closeAllPanels()">Home</a></li>
+      <li><a href="products.html" onclick="closeAllPanels()">Products</a></li>
+      <li><a href="register.html" onclick="closeAllPanels()">Register</a></li>
+      <li><a href="about.html" onclick="closeAllPanels()">About</a></li>
+      <li><a href="natalia.html" onclick="closeAllPanels()">Natalia Ambrosio</a></li>
+    </ul>
+    <div class="panel-search">
+      <input type="text" placeholder="Search...">
+      <button type="button">Search</button>
+    </div>
+  </div>
+
+  <!-- ========== BAG SLIDE PANEL (bag icon → right) ========== -->
+  <div class="mobile-panel bag-panel" id="bagPanel">
+    <div class="panel-header">
+      <span>Purchases</span>
+      <button class="panel-close-btn" onclick="closeAllPanels()" aria-label="Close cart">&#10005;</button>
+    </div>
+    <div class="bag-panel-content">
+      <h2>Purchases</h2>
+      <table class="purchases-table">
+        <tbody id="mobilePanelCartBody">
+          <tr><td colspan="2" class="cart-empty-msg">Your cart is empty</td></tr>
+        </tbody>
+      </table>
+      <input type="button" class="checkout-btn" value="Go to Checkout" onclick="openCheckoutPanel()">
+    </div>
+  </div>
+
+
+  <!-- ========== CHECKOUT SLIDE PANEL (right) ========== -->
+  <div class="checkout-panel" id="checkoutPanel">
+    <div class="checkout-panel-header">
+      <h2>&#128722; Your Cart</h2>
+      <button class="checkout-panel-close" onclick="closeCheckoutPanel()" aria-label="Close cart">&#10005;</button>
+    </div>
+    <div class="checkout-panel-body" id="checkoutPanelBody">
+      <p class="checkout-panel-empty">Your cart is empty</p>
+    </div>
+    <div class="checkout-panel-success cp-order-success" id="checkoutPanelSuccess" style="display:none;">
+      <h3>&#10003; Order Placed!</h3>
+      <p>Thank you for your purchase. We will contact you shortly.</p>
+    </div>
+    <div class="checkout-panel-footer">
+      <button class="cp-btn-order" onclick="placeOrder()">Place Order</button>
+      <button class="cp-btn-continue" onclick="closeCheckoutPanel()">Continue Shopping</button>
+    </div>
+  </div>
+
+  <!-- ========== HEADER ========== -->
   <header>
-    <a href="index.html">
-      <img id="logo" src="logo.svg" alt="Computer Force Logo">
-    </a>
+    <!-- Hamburger button (mobile only) -->
+    <button class="mobile-hamburger-btn" onclick="openNavPanel()" aria-label="Open menu">
+      <div class="hamburger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+
+    <!-- Logo (centred, links to home) -->
+    <a href="index.html" class="logo-text">Computer <span>Force</span></a>
+
+    <!-- Bag icon button (mobile only) -->
+    <button class="mobile-bag-btn" onclick="openBagPanel()" aria-label="Open cart">
+      &#128717;
+      <span class="cart-badge" id="cartBadge"></span>
+    </button>
   </header>
 
-  <!-- NAVIGATION / MENU -->
-  <nav id="nav-menu">
-    <button id="hamburger-btn" class="hamburger-btn" type="button">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+  <!-- ========== NAV / MENU (desktop) ========== -->
+  <nav>
     <ul>
       <li><a href="products.html">Products</a></li>
       <li><a href="register.html">Register</a></li>
       <li><a href="about.html">About</a></li>
+      <li><a href="natalia.html">Natalia Ambrosio</a></li>
     </ul>
     <div class="search-area">
       <input type="text" placeholder="Search...">
@@ -35,7 +104,7 @@
     </div>
   </nav>
 
-  <!-- MAIN CONTENT + ASIDE WRAPPER -->
+  <!-- ========== CONTENT WRAPPER ========== -->
   <div class="content-wrapper">
 
     <!-- MAIN SECTION (80%) -->
@@ -43,7 +112,6 @@
       <h1>Welcome to Computer Force</h1>
       <p class="page-intro">Computer Force is your online expert in all things computing</p>
 
-      <!-- Product Category Cards - each links to the anchor on products.html -->
       <div class="category-grid">
 
         <div class="category-card">
@@ -88,21 +156,28 @@
           <h2>Tablets</h2>
         </div>
 
-      </div><!-- .category-grid -->
+      </div>
     </main>
 
-    <!-- ASIDE SECTION (20%) -->
+    <!-- ASIDE SECTION (20% — desktop only) -->
     <aside>
       <h2>Purchases</h2>
-      <div id="cart-items-list"></div>
       <table class="purchases-table">
         <tr>
-          <td id="cart-count">0 items</td>
-          <td id="cart-subtotal">$0.00</td>
+          <td>Test Item 1</td>
+          <td>$1000</td>
+        </tr>
+        <tr>
+          <td>Test Item 2</td>
+          <td>$500</td>
+        </tr>
+        <tr>
+          <td><strong>Total</strong></td>
+          <td><strong>$1500</strong></td>
         </tr>
         <tr>
           <td colspan="2">
-            <input type="button" class="checkout-btn" value="Go to Checkout" onclick="window.location.href='checkout.html'">
+            <input type="button" class="checkout-btn" value="Go to Checkout" onclick="openCheckoutPanel()">
           </td>
         </tr>
       </table>
@@ -110,28 +185,13 @@
 
   </div><!-- .content-wrapper -->
 
-  <!-- FOOTER -->
+  <!-- ========== FOOTER ========== -->
   <footer>
     <p>&copy; 2026 Natalia Ambrosio. All rights reserved.</p>
   </footer>
 
+  <!-- ========== JAVASCRIPT — Panel Controls ========== -->
   <script src="cart.js"></script>
-  <script>
-    // Hamburger menu toggle
-    const hamburgerBtn = document.getElementById('hamburger-btn');
-    const navMenu = document.getElementById('nav-menu');
-    
-    hamburgerBtn.addEventListener('click', function() {
-      navMenu.classList.toggle('active');
-    });
-    
-    // Close menu when a link is clicked
-    const navLinks = navMenu.querySelectorAll('a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        navMenu.classList.remove('active');
-      });
-    });
-  </script>
+
 </body>
 </html>
